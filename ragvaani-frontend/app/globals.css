@@ -1,0 +1,427 @@
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────── */
+:root {
+  /* Background layers */
+  --bg-base: #0a0e1a;
+  --bg-surface: #0d1117;
+  --bg-elevated: #111827;
+  --bg-hover: #1a2033;
+
+  /* Primary palette */
+  --primary-start: #6366f1;
+  --primary-end: #8b5cf6;
+  --primary-glow: rgba(99, 102, 241, 0.35);
+
+  /* Accent */
+  --accent-emerald: #10b981;
+  --accent-rose: #f43f5e;
+  --accent-amber: #f59e0b;
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+
+  /* Borders */
+  --border-subtle: rgba(99, 102, 241, 0.12);
+  --border-glow: rgba(99, 102, 241, 0.35);
+
+  /* Glass */
+  --glass-bg: rgba(13, 17, 23, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Fonts */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'Courier New', monospace;
+}
+
+@theme inline {
+  --color-background: var(--bg-base);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+/* ─── Base Reset & Body ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ─── Selection Color ───────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(99, 102, 241, 0.35);
+  color: #f1f5f9;
+}
+
+::-moz-selection {
+  background-color: rgba(99, 102, 241, 0.35);
+  color: #f1f5f9;
+}
+
+/* ─── Scrollbar Styling ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.65);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.4) transparent;
+}
+
+/* ─── Utility: Hide Scrollbar ───────────────────────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Glassmorphism Utilities ───────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel {
+  background: rgba(13, 17, 23, 0.9);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+}
+
+/* ─── Gradient Text ─────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #a78bfa, #c084fc, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow Effects ──────────────────────────────────────────────────── */
+.glow-indigo {
+  box-shadow:
+    0 0 20px rgba(99, 102, 241, 0.3),
+    0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+.glow-indigo-lg {
+  box-shadow:
+    0 0 30px rgba(99, 102, 241, 0.4),
+    0 0 80px rgba(99, 102, 241, 0.15),
+    0 0 120px rgba(139, 92, 246, 0.08);
+}
+
+.glow-rose {
+  box-shadow:
+    0 0 20px rgba(244, 63, 94, 0.4),
+    0 0 60px rgba(244, 63, 94, 0.15);
+}
+
+.glow-emerald {
+  box-shadow:
+    0 0 15px rgba(16, 185, 129, 0.3),
+    0 0 40px rgba(16, 185, 129, 0.1);
+}
+
+/* ─── Keyframe Animations ───────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 15px rgba(99, 102, 241, 0.3),
+      0 0 40px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 25px rgba(99, 102, 241, 0.5),
+      0 0 70px rgba(99, 102, 241, 0.2);
+  }
+}
+
+@keyframes glow-pulse-rose {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(244, 63, 94, 0.4),
+      0 0 15px rgba(244, 63, 94, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(244, 63, 94, 0),
+      0 0 25px rgba(244, 63, 94, 0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-dot {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes ping-rose {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ─── Animation Classes ─────────────────────────────────────────────── */
+.animate-glow-pulse {
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+.animate-glow-rose {
+  animation: glow-pulse-rose 1.2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(139, 92, 246, 0.2) 50%,
+    rgba(99, 102, 241, 0.1) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ─── Input Focus Ring ──────────────────────────────────────────────── */
+.focus-ring {
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.focus-ring:focus {
+  box-shadow:
+    0 0 0 2px rgba(99, 102, 241, 0.4),
+    0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* ─── Prose Overrides for react-markdown ───────────────────────────── */
+.prose-ragvaani {
+  color: var(--text-primary);
+  line-height: 1.75;
+}
+
+.prose-ragvaani h1,
+.prose-ragvaani h2,
+.prose-ragvaani h3,
+.prose-ragvaani h4 {
+  color: #f1f5f9;
+  font-weight: 700;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+.prose-ragvaani p {
+  margin-bottom: 0.85em;
+}
+
+.prose-ragvaani strong {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.prose-ragvaani em {
+  color: #c4b5fd;
+}
+
+.prose-ragvaani a {
+  color: #818cf8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-ragvaani a:hover {
+  color: #a5b4fc;
+}
+
+.prose-ragvaani ul,
+.prose-ragvaani ol {
+  padding-left: 1.5em;
+  margin-bottom: 0.85em;
+}
+
+.prose-ragvaani ul {
+  list-style-type: disc;
+}
+
+.prose-ragvaani ol {
+  list-style-type: decimal;
+}
+
+.prose-ragvaani li {
+  margin-bottom: 0.35em;
+}
+
+.prose-ragvaani blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 1em;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+.prose-ragvaani table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+.prose-ragvaani th {
+  background: rgba(99, 102, 241, 0.15);
+  color: #c4b5fd;
+  font-weight: 600;
+  padding: 0.6em 1em;
+  text-align: left;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.prose-ragvaani td {
+  padding: 0.55em 1em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+}
+
+.prose-ragvaani tr:hover td {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.prose-ragvaani code:not(pre code) {
+  background: rgba(99, 102, 241, 0.15);
+  color: #c4b5fd;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.prose-ragvaani pre {
+  margin: 0.75em 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.prose-ragvaani hr {
+  border: none;
+  border-top: 1px solid rgba(99, 102, 241, 0.15);
+  margin: 1.5em 0;
+}
+
+/* ─── Gradient Backgrounds ──────────────────────────────────────────── */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.bg-gradient-primary-hover:hover {
+  background: linear-gradient(135deg, #5558e8, #7c4fea);
+}
+
+/* ─── Transition Utilities ──────────────────────────────────────────── */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-spring {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

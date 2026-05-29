@@ -1,0 +1,19 @@
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/.env
+backend/ragvaani.db
+backend/ragvaani.db-shm
+backend/ragvaani.db-wal
+backend/qdrant_db/
+backend/qdrant_db_test/
+backend/uploads/
+
+# Frontend
+ragvaani-frontend/node_modules/
+ragvaani-frontend/.next/
+ragvaani-frontend/.env
+ragvaani-frontend/.env.local
+
+# General
+.DS_Store

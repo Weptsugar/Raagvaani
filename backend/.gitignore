@@ -1,0 +1,23 @@
+# Environments
+.env
+.env.*
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite3
+qdrant_db/
+qdrant_db_test/
+
+# Application specific
+uploads/
+test_dummy.csv
