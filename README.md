@@ -2,6 +2,13 @@
 
 Raagvaani is an advanced, full-stack multilingual voice and text assistant. Built with a heavy focus on **Generative AI** and **Information Retrieval**, it leverages state-of-the-art Natural Language Processing (NLP) to provide fast, highly accurate, and context-aware responses.
 
+## ✨ Key Features
+
+* **Multi-Format Document Support (RAG):** Users can seamlessly upload documents for the AI to read and answer questions from. Supported formats include: **PDF, DOCX, TXT, XLSX, and CSV** (up to 50MB per file).
+* **Multilingual Voice Chat:** Speak to the AI in English or Hindi, and it will respond with a natural, synthesized voice in the matching language natively in the browser.
+* **Document-Scoped Conversations:** Users can "scope" their chat to a specific uploaded document or chat generally across all their data.
+* **Multi-Session Memory:** Saves individual chat sessions (backed by SQLite) so users can resume past conversations anytime.
+
 ## 🧠 AI & Machine Learning Architecture
 
 This project implements a sophisticated **Retrieval-Augmented Generation (RAG)** pipeline, combining traditional AI/ML techniques with modern LLMs to ensure high-quality, hallucination-free generation.
@@ -16,10 +23,25 @@ This project implements a sophisticated **Retrieval-Augmented Generation (RAG)**
 
 ## 🏗️ Project Structure
 
-This repository is organized into two main parts:
-
-- **`/ragvaani-frontend`**: The user interface, built with **Next.js**, React, and TailwindCSS. It handles the chat UI, file uploads, text-to-speech (TTS), and speech-to-text input.
-- **`/backend`**: The API server, built with **FastAPI** (Python). It manages database connections (SQLite/Redis), vector search (Qdrant), and the core AI RAG logic.
+```text
+Raagvaani/
+│
+├── ragvaani-frontend/       # Next.js User Interface
+│   ├── app/                 # Next.js App Router (Pages & Layout)
+│   ├── components/          # Reusable React components (Chat UI, Sidebar, etc.)
+│   ├── lib/                 # API clients and utility functions
+│   └── public/              # Static assets (icons, images)
+│
+└── backend/                 # FastAPI & AI Server
+    ├── app/
+    │   ├── core/            # Configuration, Auth, Redis, Storage
+    │   ├── db/              # SQLite Database Models & Engine
+    │   ├── rag/             # RAG Logic (Ingestion, Hybrid Search, Reranking)
+    │   └── routes/          # API Endpoints (Chat, Uploads, Sessions)
+    ├── qdrant_db/           # Local Qdrant Vector Storage
+    ├── uploads/             # Raw user uploaded documents
+    └── requirements.txt     # Python dependencies
+```
 
 ## 🚀 Getting Started
 

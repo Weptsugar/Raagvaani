@@ -389,7 +389,17 @@ export default function Page() {
     // Explicitly set the voice if available, which fixes issues where 
     // the OS/browser uses the default English voice for Hindi text.
     const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang === targetLang || v.lang.startsWith(language));
+    let voice;
+    
+    if (language === 'hi') {
+      // Prefer the Ananya Neural voice if available
+      voice = voices.find(v => v.name.includes('Ananya') || v.voiceURI.includes('AnanyaNeural') || v.name.includes('hi-IN-AnanyaNeural'));
+    }
+
+    if (!voice) {
+      voice = voices.find(v => v.lang === targetLang || v.lang.startsWith(language));
+    }
+
     if (voice) {
       utterance.voice = voice;
     }
